@@ -1,6 +1,8 @@
 # AI Crafts Prompt
 
-## Template
+
+## Prompting to Prompt Template 
+
 
 ```
 I need your expertise to write a highly effective prompt. 
