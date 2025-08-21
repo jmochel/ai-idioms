@@ -1,43 +1,6 @@
 # AI Crafts Prompt
 
 
-## Prompting to Prompt Template 
-
-
-```
-I need your expertise to write a highly effective prompt. 
-My goal is to have another  LLM (say, gpt-4o) perform/generate 
-
-[Describe desired outcome in detail].
-
-Key elements that must be included or considered are 
-
-[mention crucial details A, B, and C, like tone, format, specific constraints] . 
-
-Before you draft the prompt, ask me any clarifying questions you have. 
-I want to ensure we cover all angles so the final prompt is comprehensive.
-```
-
-## Example
-
-```
-I need your expertise to write a highly effective prompt. My goal is to 
-have another  LLM (say, gpt-4o) generate an approach to 
-
-Produce code approaches to trace activity and metrics for a set of
-microservices implemented in Java, Dropwizard 1 and 3 that are monitored 
-using DataDog.
- 
-Key elements that must be included or considered are
-
-1.The use of standards such as W3C Trace Context
-2.The use of Logback/SLF4J 
-3.The use of default mechanisms of datadog instrumentation 
-4.The possible simultaneous use of other monitoring instrumentation frameworks (such as Jaeger) for non-production (i.e. QA, DEV, UAT) environments
-
-Before you draft the prompt, ask me any clarifying questions you have. 
-I want to ensure we cover all angles so the final prompt is comprehensive.
-```
 
 # Q&A Prompt Strategy
 
@@ -52,7 +15,7 @@ Source [4-must-know-ai-prompt-strategies-for-developers](https://reykario.medium
 3. You provide additional details based on these questions
 4. The AI uses this enhanced context to deliver a more tailored solution
 
-## Tempolate 
+## Template 
 
 ```
 I need to build [your result here]. 
