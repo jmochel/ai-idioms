@@ -1,0 +1,18 @@
+{
+    "enableAllProjectMcpServers": true,
+    "permissions": {
+        "allow": [
+          "Bash(npm run lint)",
+          "Bash(npm run test:*)",
+          "Read(~/.zshrc)",
+          "Read(~/.bashrc)",
+          "Read(~/.claude/CLAUDE.md)"
+        ],
+        "ask": [
+            "Bash(git push)"
+        ]
+      },
+    "env": {
+        "ENV_VAR_NAME": "value"
+    }
+}
