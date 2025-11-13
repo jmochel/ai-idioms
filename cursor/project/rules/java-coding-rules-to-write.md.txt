@@ -1,0 +1,71 @@
+## Code Review
+
+### Spotting a GOD class
+    - More than 500 lines of code (with exceptions, of course).
+    - Multiple private utility methods doing things unrelated to the core responsibility.
+    - More than 3–4 injected services.
+    - Mixing business logic, persistence, and UI formatting in one class.
+    - Method names like registerUserAndSendEmailAndLogEvent() (seriously, I’ve seen this).
+    - A class that’s impossible to test without mocking half the system.
+
+### What to look for in JVM Shutdown Hooks 
+
+Best current practices (experienced engineers)
+
+*   **One small orchestrating hook** that _signals_ shutdown and returns quickly.
+*   Keep it **idempotent** and **timeout-bounded** (no long waits, no loops).
+*   Delegate real work to your **normal shutdown path** (lifecycle manager).
+*   Don’t start new threads; don’t depend on thread pools being alive.
+*   Use **stderr** or pre-stopped logging; avoid complex logging here.
+*   **Container-aware**: begin shutdown immediately on SIGTERM; meet grace window.
+*   **Test** with integration tests that send SIGTERM; assert full stop within SLO.
+
+### Synchronization and Locking 
+
+- Thought-leader practices (books/talks/framework guidance)
+
+*   Design **for immutability**; eliminate the need for locks where possible.
+*   Use **actor/message-passing** or **event loops** for global coordination.
+*   Partition state; use **striped locks** or **CRDT-like** patterns for scalability.
+*   Treat static mutable state as a code smell; isolate in a module with a single, test-swappable interface.
+*   Prefer **idempotent, side-effect-free** APIs; move sequencing to orchestrators.
+*   Instrument locks (timings, contention counters); fail CI if contention exceeds thresholds.
+
+
+## You Can Suppress Exceptions in try-with-resources — But They're Not Always Visible
+
+But, when both the try block and the resource’s close() method throw exceptions, only one is visible.
+
+```java
+class ProblematicResource implements AutoCloseable {
+  public void close() throws Exception {
+    throw new Exception("Exception from close()");
+  }
+}
+
+try (ProblematicResource res = new ProblematicResource()) {
+  throw new Exception("Exception from try block");
+} catch (Exception e) {
+  System.out.println("Caught: " + e.getMessage());
+  for (Throwable suppressed : e.getSuppressed()) {
+    System.out.println("Suppressed: " + suppressed.getMessage());
+  }
+}
+```
+
+Output:
+
+```plaintext
+Caught: Exception from try block
+Suppressed: Exception from close()
+```
+
+Moral: log suppressed exceptions. if you don't you might miss real resource leaks or connection pool issues happening silently behind the scenes
+
+
+
+
+
+
+
+

@@ -5,6 +5,7 @@
 ```plaintext
 ai-idioms/
   cursor/
+    doc/          # Contains documentation on configuring cursor 
     project/
       rules/
         00-core-persona.md
@@ -21,8 +22,7 @@ ai-idioms/
         unlink.sh
         refresh.sh
         verify.sh
-    user/
-      README.md               # Pointers for pasting into Cursor’s User Rules
+    snippets/   # Example prompts and snippets for cursor 
 ```
 
 - Each individual Project
