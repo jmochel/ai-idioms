@@ -1,3 +1,7 @@
+---
+description: Enforce and auto-draft Conventional Commits v1.0.0 messages for commits and PRs
+alwaysApply: true
+---
 # Conventional Commits (MDC)
 
 ```yaml
